@@ -1,4 +1,5 @@
 #define _CRT_SECURE_NO_WARNINGS
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -21,7 +22,9 @@ node* curr;
 node* nnode;
 
 void process_create() {
+    first = (node*)malloc(sizeof(node));
     first = NULL;
+    curr = (node*)malloc(sizeof(node));
     curr = NULL;
     nnode = NULL;
 }
@@ -128,7 +131,8 @@ void process_search(char tok2[]) {
 
     while (curr != NULL) {
         if (strcmp(curr->name, tok2) == 0) {
-            printf("%s %c %s %s %f %d %d\n", curr->name, curr->sex, curr->city, curr->dept, curr->gpa, curr->height, curr->weight);
+            printf("%s %c %s %s %f %d %d\n", curr->name, curr->sex, curr->city, curr->dept, curr->gpa, curr->height,
+                curr->weight);
             return;
         }
         curr = curr->link;
@@ -144,10 +148,12 @@ void process_print() {
         curr = first;
 
         while (curr->link != NULL) {
-            printf("%s %c %s %s %f %d %d\n", curr->name, curr->sex, curr->city, curr->dept, curr->gpa, curr->height, curr->weight);
+            printf("%s %c %s %s %f %d %d\n", curr->name, curr->sex, curr->city, curr->dept, curr->gpa, curr->height,
+                curr->weight);
             curr = curr->link;
         }
-        printf("%s %c %s %s %f %d %d\n", curr->name, curr->sex, curr->city, curr->dept, curr->gpa, curr->height, curr->weight);
+        printf("%s %c %s %s %f %d %d\n", curr->name, curr->sex, curr->city, curr->dept, curr->gpa, curr->height,
+            curr->weight);
     }
 }
 
@@ -166,8 +172,7 @@ void memory_free() {
     printf("메모리 해제 완료.\n");
 }
 
-int main()
-{
+int main() {
     FILE* fp = fopen("input.txt", "r+t");
 
     if (fp == NULL) {
@@ -212,5 +217,8 @@ int main()
 
     fclose(fp);
     memory_free();
+    free(first);
+    free(curr);
+
     return 0;
 }
