@@ -13,7 +13,7 @@ struct _fnode {
 	node* link;
 };
 
-node first;
+fnode first;
 
 void process_create_queue() {
 	first.link = NULL;
@@ -41,12 +41,12 @@ void enqueue(char a) {
 	while (curr->link != NULL) {
 		curr = curr->link;
 	}
-	nnode->link = curr->link;
 	curr->link = nnode;
+	nnode->link = NULL;
 }
 
 char dequeue() {
-	node *dnode;
+	node* dnode;
 	dnode = first.link;
 	first.link = dnode->link;
 	char dequeue_data = dnode->data;
